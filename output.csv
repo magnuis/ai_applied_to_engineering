@@ -1,0 +1,123 @@
+Column,Value
+@context_@language,en
+@context_@vocab,https://schema.org/
+@context_column,ml:column
+@context_extract,ml:extract
+@context_field,ml:field
+@context_fileProperty,ml:fileProperty
+@context_format,ml:format
+@context_includes,ml:includes
+@context_isEnumeration,ml:isEnumeration
+@context_jsonPath,ml:jsonPath
+@context_ml,http://mlcommons.org/schema/
+@context_parentField,ml:parentField
+@context_path,ml:path
+@context_recordSet,ml:recordSet
+@context_references,ml:references
+@context_regex,ml:regex
+@context_repeated,ml:repeated
+@context_replace,ml:replace
+@context_sc,https://schema.org/
+@context_separator,ml:separator
+@context_source,ml:source
+@context_subField,ml:subField
+@context_transform,ml:transform
+@context_data_@id,ml:data
+@context_data_@type,@json
+@context_dataType_@id,ml:dataType
+@context_dataType_@type,@vocab
+citation,None
+license,http://opendatacommons.org/licenses/odbl/1.0/
+url,https://www.kaggle.com/datasets/fedesoriano/heart-failure-prediction
+distribution_0_contentUrl,https://www.kaggle.com/api/v1/datasets/download/fedesoriano/heart-failure-prediction
+distribution_0_contentSize,8.557 KB
+distribution_0_md5,Vf4x+QaJqsfAK+2jQ4LBsQ==
+distribution_0_fileExtension,.zip
+distribution_0_encodingFormat,application/zip
+distribution_0_@type,sc:FileObject
+distribution_0_name,archive.zip
+distribution_0_description,Archive containing all the contents of the Heart Failure Prediction Dataset dataset
+distribution_1_contentUrl,heart.csv
+distribution_1_containedIn,archive.zip
+distribution_1_encodingFormat,application/vnd.ms-excel
+distribution_1_@type,sc:FileObject
+distribution_1_name,heart.csv
+distribution_1_description,The data contains 918 observations with 12 attributes.
+recordSet_0_field_0_dataType_0,sc:Integer
+recordSet_0_field_0_source_distribution,heart.csv
+recordSet_0_field_0_source_extract_column,Age
+recordSet_0_field_0_@type,ml:Field
+recordSet_0_field_0_name,Age
+recordSet_0_field_0_description,age
+recordSet_0_field_1_dataType_0,sc:Text
+recordSet_0_field_1_source_distribution,heart.csv
+recordSet_0_field_1_source_extract_column,Sex
+recordSet_0_field_1_@type,ml:Field
+recordSet_0_field_1_name,Sex
+recordSet_0_field_1_description,sex
+recordSet_0_field_2_dataType_0,sc:Text
+recordSet_0_field_2_source_distribution,heart.csv
+recordSet_0_field_2_source_extract_column,ChestPainType
+recordSet_0_field_2_@type,ml:Field
+recordSet_0_field_2_name,ChestPainType
+recordSet_0_field_2_description,chest pain type
+recordSet_0_field_3_dataType_0,sc:Integer
+recordSet_0_field_3_source_distribution,heart.csv
+recordSet_0_field_3_source_extract_column,RestingBP
+recordSet_0_field_3_@type,ml:Field
+recordSet_0_field_3_name,RestingBP
+recordSet_0_field_3_description,resting blood pressure
+recordSet_0_field_4_dataType_0,sc:Integer
+recordSet_0_field_4_source_distribution,heart.csv
+recordSet_0_field_4_source_extract_column,Cholesterol
+recordSet_0_field_4_@type,ml:Field
+recordSet_0_field_4_name,Cholesterol
+recordSet_0_field_4_description,serum cholesterol
+recordSet_0_field_5_dataType_0,sc:Integer
+recordSet_0_field_5_source_distribution,heart.csv
+recordSet_0_field_5_source_extract_column,FastingBS
+recordSet_0_field_5_@type,ml:Field
+recordSet_0_field_5_name,FastingBS
+recordSet_0_field_5_description,fasting blood sugar
+recordSet_0_field_6_dataType_0,sc:Text
+recordSet_0_field_6_source_distribution,heart.csv
+recordSet_0_field_6_source_extract_column,RestingECG
+recordSet_0_field_6_@type,ml:Field
+recordSet_0_field_6_name,RestingECG
+recordSet_0_field_6_description,resting electrocardiogram results
+recordSet_0_field_7_dataType_0,sc:Integer
+recordSet_0_field_7_source_distribution,heart.csv
+recordSet_0_field_7_source_extract_column,MaxHR
+recordSet_0_field_7_@type,ml:Field
+recordSet_0_field_7_name,MaxHR
+recordSet_0_field_7_description,maximum heart rate achieved
+recordSet_0_field_8_dataType_0,sc:Boolean
+recordSet_0_field_8_source_distribution,heart.csv
+recordSet_0_field_8_source_extract_column,ExerciseAngina
+recordSet_0_field_8_@type,ml:Field
+recordSet_0_field_8_name,ExerciseAngina
+recordSet_0_field_8_description,exercise induced angina
+recordSet_0_field_9_dataType_0,sc:Float
+recordSet_0_field_9_source_distribution,heart.csv
+recordSet_0_field_9_source_extract_column,Oldpeak
+recordSet_0_field_9_@type,ml:Field
+recordSet_0_field_9_name,Oldpeak
+recordSet_0_field_9_description,oldpeak = ST
+recordSet_0_field_10_dataType_0,sc:Text
+recordSet_0_field_10_source_distribution,heart.csv
+recordSet_0_field_10_source_extract_column,ST_Slope
+recordSet_0_field_10_@type,ml:Field
+recordSet_0_field_10_name,ST_Slope
+recordSet_0_field_10_description,the slope of the peak exercise ST segment
+recordSet_0_field_11_dataType_0,sc:Integer
+recordSet_0_field_11_source_distribution,heart.csv
+recordSet_0_field_11_source_extract_column,HeartDisease
+recordSet_0_field_11_@type,ml:Field
+recordSet_0_field_11_name,HeartDisease
+recordSet_0_field_11_description,target
+recordSet_0_@type,ml:RecordSet
+recordSet_0_name,heart.csv_records
+recordSet_0_description,The data contains 918 observations with 12 attributes.
+@type,sc:Dataset
+name,Heart-Failure-Prediction-Dataset
+description,11 clinical features for predicting heart disease events.
