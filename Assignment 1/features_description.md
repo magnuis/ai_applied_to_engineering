@@ -1,0 +1,14 @@
+- Age - customer's age
+- Education - customer’s level of education
+- Kidhome - number of small children in customer’s household
+- Recency - number of days since the last purchase
+- MntWines - amount spent on wine products in the last 2 years
+- MntFruits - amount spent on fruits products in the last 2 years
+- MntSweetProducts - amount spent on sweet products in the last 2 years
+- MntGoldProds - amount spent on gold products in the last 2 years
+- MntFishMeatProdcts - amount spent on meat or fish products in the last 2 years
+- NumWebPurchases - number of purchases made through company’s web site
+- NumStorePurchases - number of purchases made directly in stores
+- NumWebVisitsMonth - number of visits to company’s web site in the last month
+- Years_customer - how many years have been the customer enrolled with the company
+- Num_AcceptedCmp - number of marketing campaigns for which the customer accepted the offer
