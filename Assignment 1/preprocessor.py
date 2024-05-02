@@ -54,7 +54,8 @@ class Preprocessor:
             data['WebToStorePurchaseRatio'] = data['NumWebPurchases'] / (data['NumStorePurchases'] + 1)  # Adding 1 to avoid division by zero
 
         if (remove_outliers):
-            data = self.__remove_outliers(data)            
+            # data = self.__remove_outliers(data)            
+            data = self.__remove_outliers2(data)            
 
         scaler = StandardScaler()
 
