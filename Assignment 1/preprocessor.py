@@ -1,7 +1,5 @@
-from sklearn.decomposition import PCA 
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import  MinMaxScaler
 import pandas as pd
-import numpy as np
 from sklearn.model_selection import train_test_split
 
 class Preprocessor:
@@ -9,8 +7,7 @@ class Preprocessor:
     '''
 
     def __init__(self):
-        self._data = pd.read_csv("customer_data_large.csv")
-        self.scaler = StandardScaler()
+        self.scaler = MinMaxScaler()
 
     def get_raw_data(self):
         '''Get the full raw, unhandled data set
@@ -20,7 +17,7 @@ class Preprocessor:
         pandas.DataFrame
             raw dataframe retrieved from `ucimlrepo` library
         '''
-        return self._data
+        return pd.read_csv("customer_data_large.csv")
     
     def get_data(self, test_size=0.25, random_state=42, aggregate_features=False, remove_outliers=True):
         '''Prepare data for preprocessing
@@ -32,7 +29,7 @@ class Preprocessor:
         random_state : int
             Random state to be used as random seed. Defaults to 42.
         aggregate_features : bool
-            Should aggregate new features; TotalSpend, AvgSpendPerPurchase, TotalPurchases and WebStoreToPurchaseRatio.
+            Should aggregate new features; TotalSpend, AvgSpendPerPurchase, TotalPurchases.
         remove_outliers : bool
             Should remove outliers. 
 
@@ -46,35 +43,37 @@ class Preprocessor:
         data = self.get_raw_data()
 
         split_target = (test_size < 0 or test_size > 1)
-
         if (aggregate_features):
             data['TotalSpend'] = data[['MntWines', 'MntFruits', 'MntSweetProducts', 'MntGoldProds', 'NumWebVisitsMonth']].sum(axis=1)
             data['AvgSpendPerPurchase'] = data['TotalSpend'] / (data['NumWebPurchases'] + data['NumStorePurchases'] + 1)
             data['TotalPurchases'] = data[['NumWebPurchases', 'NumStorePurchases']].sum(axis=1)
-            data['WebToStorePurchaseRatio'] = data['NumWebPurchases'] / (data['NumStorePurchases'] + 1)  # Adding 1 to avoid division by zero
+        
+        if (remove_outliers):         
+            data = self.__remove_outliers(data)            
 
-        if (remove_outliers):
-            # data = self.__remove_outliers(data)            
-            data = self.__remove_outliers2(data)            
-
-        scaler = StandardScaler()
+        self.scaler = MinMaxScaler()
 
         if split_target:
 
-            train, test = train_test_split(data, test_size=0.25, random_state=42)
+            train, test = train_test_split(data, test_size=0.25, random_state=random_state)
 
-            train_scaled = scaler.fit_transform(train)
-            test_scaled = scaler.transform(test)
+            train_scaled = self.scaler.fit_transform(train)
+            test_scaled = self.scaler.transform(test)
 
             train_scaled = pd.DataFrame(data=train_scaled, columns=data.columns) 
             test_scaled = pd.DataFrame(data=test_scaled, columns=data.columns) 
         else:
-            train_scaled = scaler.fit_transform(data)
+            train_scaled = self.scaler.fit_transform(data)
             train_scaled = pd.DataFrame(data=train_scaled, columns=data.columns) 
             
             test_scaled = None
 
+
         return train_scaled, test_scaled    
+    
+
+    def get_scaler(self):
+        return self.scaler
 
 
     def __IQR_bounds(self, df, column, lower_quantile=0.25, upper_quantile=0.75, should_print=True):
@@ -92,45 +91,8 @@ class Preprocessor:
 
         return lower_bound, upper_bound
 
-    
 
     def __remove_outliers(self, df):
-        _, MntWines = self.__IQR_bounds(df, 'MntWines', should_print=False)
-        _, MntFruits = self.__IQR_bounds(df, 'MntFruits', should_print=False)
-        _, MntSweetProducts = self.__IQR_bounds(df, 'MntSweetProducts', should_print=False)
-        _, MntGoldProds = self.__IQR_bounds(df, 'MntGoldProds', should_print=False)
-        _, NumWebPurchases = self.__IQR_bounds(df, 'NumWebPurchases', should_print=False)
-        _, MntFishMeatProdcts = self.__IQR_bounds(df, 'MntFishMeatProdcts', should_print=False)
-
-        MntWines_index = df[(df['MntWines'] > MntWines)].index
-        print(f'Removing {len(MntWines_index)} wine outliers')
-        df = df.drop(MntWines_index)
-        
-        MntFruits_index = df[(df['MntFruits'] > MntFruits)].index
-        print(f'Removing {len(MntFruits_index)} wine outliers')
-        df = df.drop(MntFruits_index)
-        
-        MntSweetProducts_index = df[(df['MntSweetProducts'] > MntSweetProducts)].index
-        print(f'Removing {len(MntSweetProducts_index)} wine outliers')
-        df = df.drop(MntSweetProducts_index)
-        
-        MntGoldProds_index = df[(df['MntGoldProds'] > MntGoldProds)].index
-        print(f'Removing {len(MntGoldProds_index)} wine outliers')
-        df = df.drop(MntGoldProds_index)
-        
-        NumWebPurchases_index = df[(df['NumWebPurchases'] > NumWebPurchases)].index
-        print(f'Removing {len(NumWebPurchases_index)} wine outliers')
-        df = df.drop(NumWebPurchases_index)
-        
-        MntFishMeatProdcts_index = df[(df['MntFishMeatProdcts'] > MntFishMeatProdcts)].index
-        print(f'Removing {len(MntFishMeatProdcts_index)} wine outliers')
-        df = df.drop(MntFishMeatProdcts_index)
-
-        return df
-
-    
-
-    def __remove_outliers2(self, df):
         _, bound_fruit = self.__IQR_bounds(df, 'MntFruits', should_print=False)
         _, bound_web = self.__IQR_bounds(df, 'NumWebPurchases', should_print=False)
 
@@ -160,5 +122,13 @@ class Preprocessor:
         outliers_fish_meat = df[(df['MntFishMeatProdcts'] > 1250)].index
         print(f'Removing {len(outliers_fish_meat)} fish_meat outliers')
         df = df.drop(outliers_fish_meat)
+
+        return df
+    
+
+    def aggregate_features(df):
+        df['TotalSpend'] = df[['MntWines', 'MntFruits', 'MntSweetProducts', 'MntGoldProds', 'NumWebVisitsMonth']].sum(axis=1)
+        df['AvgSpendPerPurchase'] = df['TotalSpend'] / (df['NumWebPurchases'] + df['NumStorePurchases'] + 1)
+        df['TotalPurchases'] = df[['NumWebPurchases', 'NumStorePurchases']].sum(axis=1)
 
         return df
