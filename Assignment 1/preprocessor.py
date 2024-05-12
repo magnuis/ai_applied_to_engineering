@@ -40,6 +40,7 @@ class Preprocessor:
         np.ndArray
             Prepared test data. If test_size is out of range, returns `None`.
         '''
+
         data = self.get_raw_data()
 
         split_target = (test_size < 0 or test_size > 1)
