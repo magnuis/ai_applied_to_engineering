@@ -2,7 +2,12 @@
 
 1. Download the weather_bcn.csv dataset from the Example datasets section in Atenea.
 
-2. Make sure the date column is an index and it is of datetime type. Select only the tavg (average temperature) column to obtain a one-column time series format. Split the data leaving out 2022 as the test set. Select some metrics to evaluate the results when applying the different methods. Plot the series and obtain a decomposition.
+2. Make sure the date column is an index and it is of datetime type.
+
+   1. Select only the tavg (average temperature) column to obtain a one-column time series format.
+   2. Split the data leaving out 2022 as the test set.
+   3. Select some metrics to evaluate the results when applying the different methods.
+   4. Plot the series and obtain a decomposition.
 
 3. Apply auto_arima with and without seasonality.
 
