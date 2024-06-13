@@ -147,19 +147,19 @@ class Preprocessor:
 
     def __remove_outliers(self, df):
         # Find lower and upper bound for RestingBP, and remove
-        restingbp_lower, restingbp_upper = self.__IQR_bounds(df, 'RestingBP', should_print=False)
+        restingbp_lower, restingbp_upper = self.__IQR_bounds(df, 'RestingBP', should_print=True)
         df = df[(df['RestingBP'] >= restingbp_lower) & (df['RestingBP'] <= restingbp_upper)]
         
         # Find upper bound for Cholesterol, and remove
-        _, cholesterol_upper = self.__IQR_bounds(df, 'Cholesterol', should_print=False)
+        _, cholesterol_upper = self.__IQR_bounds(df, 'Cholesterol', should_print=True)
         df = df[(df['Cholesterol'] <= cholesterol_upper)]
         
         # Find lower and upper bound for MaxHR, and remove
-        maxhr_lower, maxhr_upper = self.__IQR_bounds(df, 'MaxHR', should_print=False)
+        maxhr_lower, maxhr_upper = self.__IQR_bounds(df, 'MaxHR', should_print=True)
         df = df[(df['MaxHR'] >= maxhr_lower) & (df['MaxHR'] <= maxhr_upper)]
         
         # Find lower and upper bound for Oldpeak, and remove
-        oldpeak_lower, oldpeak_upper = self.__IQR_bounds(df, 'Oldpeak', should_print=False)
+        oldpeak_lower, oldpeak_upper = self.__IQR_bounds(df, 'Oldpeak', should_print=True)
         df = df[(df['Oldpeak'] >= oldpeak_lower) & (df['Oldpeak'] <= oldpeak_upper)]
         
         return df
